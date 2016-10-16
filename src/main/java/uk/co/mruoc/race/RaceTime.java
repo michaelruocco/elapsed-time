@@ -4,9 +4,14 @@ import java.text.NumberFormat;
 
 public class RaceTime {
 
+    private static final int MILLIS_IN_HOUR = 3600000;
+    private static final int MILLIS_IN_MINUTE = 60000;
+    private static final int MILLIS_IN_SECONDS = 1000;
+
     private final NumberFormatter numberFormatter = new NumberFormatter(2);
     private final NumberFormatter milliFormatter = new NumberFormatter(3);
 
+    private final long totalMillis;
     private final long hours;
     private final long minutes;
     private final long seconds;
@@ -19,7 +24,6 @@ public class RaceTime {
     }
 
     public RaceTime(long totalMillis) {
-        /*totalMillis = Math.abs(totalMillis);
         this.totalMillis = totalMillis;
 
         this.hours = toHours(totalMillis);
@@ -31,22 +35,40 @@ public class RaceTime {
         this.seconds = toSeconds(totalMillis);
         totalMillis -= secondsInMillis();
 
-        this.millis = totalMillis;*/
-
-        this.hours = 0;
-        this.minutes = 0;
-        this.seconds = 0;
-        this.millis = 0;
-
+        this.millis = totalMillis;
         this.formattedTime = buildFormattedTime();
     }
 
     public long getTotalMillis() {
-        return 0;
+        return totalMillis;
     }
 
     public String asString() {
         return formattedTime;
+    }
+
+    private long toHours(long totalMillis) {
+        return (totalMillis / MILLIS_IN_HOUR);
+    }
+
+    private long toMinutes(long totalMillis) {
+        return (totalMillis / MILLIS_IN_MINUTE);
+    }
+
+    private long toSeconds(long totalMillis) {
+        return (totalMillis / MILLIS_IN_SECONDS);
+    }
+
+    private long hoursInMillis() {
+        return hours * MILLIS_IN_HOUR;
+    }
+
+    private long minutesInMillis() {
+        return minutes * MILLIS_IN_MINUTE;
+    }
+
+    private long secondsInMillis() {
+        return seconds * MILLIS_IN_SECONDS;
     }
 
     private String buildFormattedTime() {
