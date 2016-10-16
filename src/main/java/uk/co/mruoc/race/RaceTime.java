@@ -47,6 +47,34 @@ public class RaceTime {
         return formattedTime;
     }
 
+    public boolean isEqualTo(RaceTime otherTime) {
+        return this.totalMillis == otherTime.totalMillis;
+    }
+
+    public boolean isAfter(RaceTime otherTime) {
+        return this.totalMillis > otherTime.totalMillis;
+    }
+
+    public boolean isBefore(RaceTime otherTime) {
+        return this.totalMillis < otherTime.totalMillis;
+    }
+
+    public long getHours() {
+        return hours;
+    }
+
+    public long getMinutes() {
+        return minutes;
+    }
+
+    public long getSeconds() {
+        return seconds;
+    }
+
+    public long getMillis() {
+        return millis;
+    }
+
     private long toHours(long totalMillis) {
         return (totalMillis / MILLIS_IN_HOUR);
     }
@@ -77,18 +105,6 @@ public class RaceTime {
                 numberFormatter.format(minutes),
                 numberFormatter.format(seconds),
                 milliFormatter.format(millis));
-    }
-
-    public boolean isEqualTo(RaceTime otherTime) {
-        return this.totalMillis == otherTime.totalMillis;
-    }
-
-    public boolean isAfter(RaceTime otherTime) {
-        return this.totalMillis > otherTime.totalMillis;
-    }
-
-    public boolean isBefore(RaceTime otherTime) {
-        return this.totalMillis < otherTime.totalMillis;
     }
 
     private static class NumberFormatter {

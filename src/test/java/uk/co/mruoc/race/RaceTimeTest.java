@@ -36,6 +36,30 @@ public class RaceTimeTest {
     }
 
     @Test
+    public void shouldReturnHours() {
+        assertThat(new RaceTime(ZERO).getHours()).isEqualTo(0);
+        assertThat(new RaceTime(ONE_HOUR).getHours()).isEqualTo(1);
+    }
+
+    @Test
+    public void shouldReturnMinutes() {
+        assertThat(new RaceTime(ZERO).getMinutes()).isEqualTo(0);
+        assertThat(new RaceTime(ONE_MINUTE).getMinutes()).isEqualTo(1);
+    }
+
+    @Test
+    public void shouldReturnSeconds() {
+        assertThat(new RaceTime(ZERO).getSeconds()).isEqualTo(0);
+        assertThat(new RaceTime(ONE_SECOND).getSeconds()).isEqualTo(1);
+    }
+
+    @Test
+    public void shouldReturnMillis() {
+        assertThat(new RaceTime(ZERO).getMillis()).isEqualTo(0);
+        assertThat(new RaceTime(ONE_MILLI).getMillis()).isEqualTo(1);
+    }
+
+    @Test
     public void shouldReturnTrueIfTimesAreEqual() {
         RaceTime time = new RaceTime(ONE_MINUTE);
         RaceTime otherTime = new RaceTime(ONE_MINUTE);
