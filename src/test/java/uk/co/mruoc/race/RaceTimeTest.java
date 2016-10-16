@@ -27,15 +27,6 @@ public class RaceTimeTest {
     }
 
     @Test
-    public void shouldReturnFormattedTimeString() {
-        assertThat(new RaceTime(ZERO).asString()).isEqualTo("00:00:00.000");
-        assertThat(new RaceTime(ONE_MILLI).asString()).isEqualTo("00:00:00.001");
-        assertThat(new RaceTime(ONE_SECOND).asString()).isEqualTo("00:00:01.000");
-        assertThat(new RaceTime(ONE_MINUTE).asString()).isEqualTo("00:01:00.000");
-        assertThat(new RaceTime(ONE_HOUR).asString()).isEqualTo("01:00:00.000");
-    }
-
-    @Test
     public void shouldReturnHours() {
         assertThat(new RaceTime(ZERO).getHours()).isEqualTo(0);
         assertThat(new RaceTime(ONE_HOUR).getHours()).isEqualTo(1);
@@ -99,6 +90,18 @@ public class RaceTimeTest {
         RaceTime time = new RaceTime(ONE_MINUTE);
         RaceTime otherTime = new RaceTime(ONE_MINUTE);
         assertThat(time.isBefore(otherTime)).isFalse();
+    }
+
+    @Test
+    public void shouldFormatRaceTime() {
+        RaceTime time = new RaceTime(ONE_HOUR + ONE_MINUTE + ONE_SECOND + ONE_MILLI);
+        assertThat(time.asString()).isEqualTo("01:01:01.001");
+    }
+
+    @Test
+    public void shouldConstructWithString() {
+        RaceTime time = new RaceTime("01:01:01.001");
+        assertThat(time.getTotalMillis()).isEqualTo(ONE_HOUR + ONE_MINUTE + ONE_SECOND + ONE_MILLI);
     }
 
 
