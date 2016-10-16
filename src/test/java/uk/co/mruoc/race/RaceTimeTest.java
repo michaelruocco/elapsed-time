@@ -13,6 +13,11 @@ public class RaceTimeTest {
     private static final int ONE_HOUR = 3600000;
 
     @Test
+    public void shouldReturnZeroMillisByDefault() {
+        assertThat(new RaceTime().getTotalMillis()).isEqualTo(ZERO);
+    }
+
+    @Test
     public void shouldReturnTotalMillis() {
         assertThat(new RaceTime(ZERO).getTotalMillis()).isEqualTo(ZERO);
         assertThat(new RaceTime(ONE_MILLI).getTotalMillis()).isEqualTo(ONE_MILLI);
@@ -29,5 +34,48 @@ public class RaceTimeTest {
         assertThat(new RaceTime(ONE_MINUTE).asString()).isEqualTo("00:01:00.000");
         assertThat(new RaceTime(ONE_HOUR).asString()).isEqualTo("01:00:00.000");
     }
+
+    @Test
+    public void shouldReturnTrueIfTimesAreEqual() {
+        RaceTime time = new RaceTime(ONE_MINUTE);
+        RaceTime otherTime = new RaceTime(ONE_MINUTE);
+        assertThat(time.isEqualTo(otherTime)).isTrue();
+    }
+
+    @Test
+    public void shouldReturnFalseIfTimesAreNotEqual() {
+        RaceTime time = new RaceTime(ONE_MINUTE);
+        RaceTime otherTime = new RaceTime(ONE_HOUR);
+        assertThat(time.isEqualTo(otherTime)).isFalse();
+    }
+
+    @Test
+    public void shouldReturnTrueIfAfterOtherTime() {
+        RaceTime time = new RaceTime(ONE_HOUR);
+        RaceTime otherTime = new RaceTime(ONE_MINUTE);
+        assertThat(time.isAfter(otherTime)).isTrue();
+    }
+
+    @Test
+    public void shouldReturnFalseIfNotAfterOtherTime() {
+        RaceTime time = new RaceTime(ONE_MINUTE);
+        RaceTime otherTime = new RaceTime(ONE_MINUTE);
+        assertThat(time.isAfter(otherTime)).isFalse();
+    }
+
+    @Test
+    public void shouldReturnTrueIfBeforeOtherTime() {
+        RaceTime time = new RaceTime(ONE_MINUTE);
+        RaceTime otherTime = new RaceTime(ONE_HOUR);
+        assertThat(time.isBefore(otherTime)).isTrue();
+    }
+
+    @Test
+    public void shouldReturnFalseIfNotBeforeOtherTime() {
+        RaceTime time = new RaceTime(ONE_MINUTE);
+        RaceTime otherTime = new RaceTime(ONE_MINUTE);
+        assertThat(time.isBefore(otherTime)).isFalse();
+    }
+
 
 }

@@ -79,6 +79,18 @@ public class RaceTime {
                 milliFormatter.format(millis));
     }
 
+    public boolean isEqualTo(RaceTime otherTime) {
+        return this.totalMillis == otherTime.totalMillis;
+    }
+
+    public boolean isAfter(RaceTime otherTime) {
+        return this.totalMillis > otherTime.totalMillis;
+    }
+
+    public boolean isBefore(RaceTime otherTime) {
+        return this.totalMillis < otherTime.totalMillis;
+    }
+
     private static class NumberFormatter {
 
         private final NumberFormat format = NumberFormat.getNumberInstance();
