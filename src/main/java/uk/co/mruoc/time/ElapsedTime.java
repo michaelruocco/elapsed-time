@@ -1,6 +1,6 @@
-package uk.co.mruoc.race;
+package uk.co.mruoc.time;
 
-public class RaceTime {
+public class ElapsedTime {
 
     public static final int MILLIS_IN_HOUR = 3600000;
     public static final int MILLIS_IN_MINUTE = 60000;
@@ -12,11 +12,11 @@ public class RaceTime {
     private final long seconds;
     private final long millis;
 
-    public RaceTime() {
+    public ElapsedTime() {
         this(0);
     }
 
-    public RaceTime(long totalMillis) {
+    public ElapsedTime(long totalMillis) {
         this.totalMillis = totalMillis;
 
         this.hours = toHours(totalMillis);
@@ -35,15 +35,15 @@ public class RaceTime {
         return totalMillis;
     }
 
-    public boolean isEqualTo(RaceTime otherTime) {
+    public boolean isEqualTo(ElapsedTime otherTime) {
         return this.totalMillis == otherTime.totalMillis;
     }
 
-    public boolean isAfter(RaceTime otherTime) {
+    public boolean isAfter(ElapsedTime otherTime) {
         return this.totalMillis > otherTime.totalMillis;
     }
 
-    public boolean isBefore(RaceTime otherTime) {
+    public boolean isBefore(ElapsedTime otherTime) {
         return this.totalMillis < otherTime.totalMillis;
     }
 
