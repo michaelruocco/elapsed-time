@@ -10,13 +10,13 @@ import static uk.co.mruoc.time.ElapsedTime.MILLIS_IN_HOUR;
 import static uk.co.mruoc.time.ElapsedTime.MILLIS_IN_MINUTE;
 import static uk.co.mruoc.time.ElapsedTime.MILLIS_IN_SECONDS;
 
-public class ElapsedTimeStringConverter {
+public class ElapsedTimeConverter {
 
     private final RaceTimeFormatter formatter = new RaceTimeFormatter();
     private final RaceTimeParser parser = new RaceTimeParser();
     private final RaceTimeValidator validator = new RaceTimeValidator();
 
-    public ElapsedTime toRaceTime(String input) {
+    public ElapsedTime toElapsedTime(String input) {
         validator.validate(input);
         return parser.parser(input);
     }

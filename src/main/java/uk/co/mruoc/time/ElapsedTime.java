@@ -35,18 +35,6 @@ public class ElapsedTime {
         return totalMillis;
     }
 
-    public boolean isEqualTo(ElapsedTime otherTime) {
-        return this.totalMillis == otherTime.totalMillis;
-    }
-
-    public boolean isAfter(ElapsedTime otherTime) {
-        return this.totalMillis > otherTime.totalMillis;
-    }
-
-    public boolean isBefore(ElapsedTime otherTime) {
-        return this.totalMillis < otherTime.totalMillis;
-    }
-
     public long getHours() {
         return hours;
     }
@@ -61,6 +49,18 @@ public class ElapsedTime {
 
     public long getMillis() {
         return millis;
+    }
+
+    public boolean isEqualTo(ElapsedTime otherTime) {
+        return this.totalMillis == otherTime.totalMillis;
+    }
+
+    public boolean isAfter(ElapsedTime otherTime) {
+        return this.totalMillis > otherTime.totalMillis;
+    }
+
+    public boolean isBefore(ElapsedTime otherTime) {
+        return this.totalMillis < otherTime.totalMillis;
     }
 
     private long toHours(long totalMillis) {
