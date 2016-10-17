@@ -92,17 +92,4 @@ public class RaceTimeTest {
         assertThat(time.isBefore(otherTime)).isFalse();
     }
 
-    @Test
-    public void shouldFormatRaceTime() {
-        RaceTime time = new RaceTime(ONE_HOUR + ONE_MINUTE + ONE_SECOND + ONE_MILLI);
-        assertThat(time.asString()).isEqualTo("01:01:01.001");
-    }
-
-    @Test
-    public void shouldConstructWithString() {
-        RaceTime time = new RaceTime("01:01:01.001");
-        assertThat(time.getTotalMillis()).isEqualTo(ONE_HOUR + ONE_MINUTE + ONE_SECOND + ONE_MILLI);
-    }
-
-
 }

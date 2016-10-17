@@ -1,9 +1,5 @@
 package uk.co.mruoc.race;
 
-import java.text.NumberFormat;
-
-import static java.lang.Integer.parseInt;
-
 public class RaceTime {
 
     public static final int MILLIS_IN_HOUR = 3600000;
@@ -16,14 +12,8 @@ public class RaceTime {
     private final long seconds;
     private final long millis;
 
-    private final String formatted;
-
     public RaceTime() {
         this(0);
-    }
-
-    public RaceTime(String input) {
-        this(new RaceTimeParser().toTotalMillis(input));
     }
 
     public RaceTime(long totalMillis) {
@@ -39,9 +29,6 @@ public class RaceTime {
         totalMillis -= secondsInMillis();
 
         this.millis = totalMillis;
-
-        RaceTimeFormatter timeFormatter = new RaceTimeFormatter();
-        this.formatted = timeFormatter.format(this);
     }
 
     public long getTotalMillis() {
@@ -76,10 +63,6 @@ public class RaceTime {
         return millis;
     }
 
-    public String asString() {
-        return formatted;
-    }
-
     private long toHours(long totalMillis) {
         return (totalMillis / MILLIS_IN_HOUR);
     }
@@ -102,85 +85,6 @@ public class RaceTime {
 
     private long secondsInMillis() {
         return seconds * MILLIS_IN_SECONDS;
-    }
-
-    private static class RaceTimeFormatter {
-
-        private final NumberFormatter numberFormatter = new NumberFormatter(2);
-        private final NumberFormatter milliFormatter = new NumberFormatter(3);
-
-        private String format(RaceTime time) {
-            return String.format("%s:%s:%s.%s",
-                    numberFormatter.format(time.getHours()),
-                    numberFormatter.format(time.getMinutes()),
-                    numberFormatter.format(time.getSeconds()),
-                    milliFormatter.format(time.getMillis()));
-        }
-
-        private static class NumberFormatter {
-
-            private final NumberFormat format = NumberFormat.getNumberInstance();
-
-            private NumberFormatter(int minimumIntegerDigits) {
-                format.setMinimumIntegerDigits(minimumIntegerDigits);
-            }
-
-            private String format(double value) {
-                return format.format(value);
-            }
-
-        }
-
-    }
-
-    private static class RaceTimeParser {
-
-        private long toTotalMillis(String input) {
-            long hours = toHours(input);
-            long minutes = toMinutes(input);
-            long seconds = toSeconds(input);
-            long millis = toMillis(input);
-            return calculateTotalMillis(hours, minutes, seconds, millis);
-        }
-
-        private int toHours(String s) {
-            return parseInt(splitOnColon(s)[0]);
-        }
-
-        private int toMinutes(String s) {
-            return parseInt(splitOnColon(s)[1]);
-        }
-
-        private String toSecondsAndMillis(String s) {
-            return splitOnColon(s)[2];
-        }
-
-        private int toSeconds(String s) {
-            String secondsAndMillis = toSecondsAndMillis(s);
-            return parseInt(splitOnDot(secondsAndMillis)[0]);
-        }
-
-        private int toMillis(String s) {
-            String secondsAndMillis = toSecondsAndMillis(s);
-            return parseInt(splitOnDot(secondsAndMillis)[1]);
-        }
-
-        private String[] splitOnColon(String s) {
-            return s.split(":");
-        }
-
-        private String[] splitOnDot(String s) {
-            return s.split("\\.");
-        }
-
-        private long calculateTotalMillis(long hours, long minutes, long seconds, long millis) {
-            long totalMillis = (hours * MILLIS_IN_HOUR);
-            totalMillis += (minutes * MILLIS_IN_MINUTE);
-            totalMillis += (seconds * MILLIS_IN_SECONDS);
-            totalMillis += millis;
-            return totalMillis;
-        }
-
     }
 
 }
