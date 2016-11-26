@@ -9,6 +9,7 @@ apply plugin: 'java'
 apply plugin: 'jacoco'
 apply plugin: 'com.github.kt3k.coveralls'
 apply plugin: 'maven'
+apply plugin: 'signing'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -48,7 +49,7 @@ artifacts {
 }
 
 gradle.taskGraph.whenReady { taskGraph ->
-    if (taskGraph.hasTask(uploadArchives)) {
+if (taskGraph.hasTask(uploadArchives)) {
         signing {
             required true
             sign configurations.archives
