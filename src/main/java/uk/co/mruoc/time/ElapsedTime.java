@@ -20,13 +20,13 @@ public class ElapsedTime {
         this.totalMillis = totalMillis;
         long tempTotalMillis = totalMillis;
 
-        this.hours = toHours(totalMillis);
+        this.hours = toHours(tempTotalMillis);
         tempTotalMillis -= hoursInMillis();
 
-        this.minutes = toMinutes(totalMillis);
+        this.minutes = toMinutes(tempTotalMillis);
         tempTotalMillis -= minutesInMillis();
 
-        this.seconds = toSeconds(totalMillis);
+        this.seconds = toSeconds(tempTotalMillis);
         tempTotalMillis -= secondsInMillis();
 
         this.millis = tempTotalMillis;
