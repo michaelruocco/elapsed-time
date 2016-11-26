@@ -1,5 +1,8 @@
 # Elapsed Time
 
+[![Build Status](https://travis-ci.org/michaelruocco/elapsed-time.svg?branch=master)](https://travis-ci.org/michaelruocco/elapsed-time)
+[![Coverage Status](https://coveralls.io/repos/github/michaelruocco/elapsed-time/badge.svg?branch=master)](https://coveralls.io/github/michaelruocco/elapsed-time?branch=master)
+
 This project gives the ability to be able to easily create and work with an elapsed time
 object. It can be created by passing a long value of milliseconds or a formatted string.
 The object has no notion of time zone or date, it is focused only on elapsed time values.
