@@ -74,7 +74,7 @@ uploadArchives {
                 packaging 'jar'
                 name 'Elapsed Time'
                 description 'Code library to provide elapsed time functionality with an easy to use API'
-                groupId 'uk.co.mruoc'
+                groupId 'com.github.michaelruocco'
                 artifactId 'elapsed-time'
                 version '1.0.0'
                 url 'https://github.com/michaelruocco/elapsed-time'
