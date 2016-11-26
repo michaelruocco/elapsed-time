@@ -18,17 +18,18 @@ public class ElapsedTime {
 
     public ElapsedTime(long totalMillis) {
         this.totalMillis = totalMillis;
+        long tempTotalMillis = totalMillis;
 
         this.hours = toHours(totalMillis);
-        totalMillis -= hoursInMillis();
+        tempTotalMillis -= hoursInMillis();
 
         this.minutes = toMinutes(totalMillis);
-        totalMillis -= minutesInMillis();
+        tempTotalMillis -= minutesInMillis();
 
         this.seconds = toSeconds(totalMillis);
-        totalMillis -= secondsInMillis();
+        tempTotalMillis -= secondsInMillis();
 
-        this.millis = totalMillis;
+        this.millis = tempTotalMillis;
     }
 
     public long getTotalMillis() {
