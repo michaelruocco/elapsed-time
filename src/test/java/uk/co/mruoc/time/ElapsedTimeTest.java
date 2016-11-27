@@ -137,4 +137,13 @@ public class ElapsedTimeTest {
         assertThat(result.getTotalMillis()).isEqualTo(ONE_MINUTE);
     }
 
+    @Test
+    public void shouldCompareOneTimeToAnother() {
+        ElapsedTime oneMinute = new ElapsedTime(ONE_MINUTE);
+
+        assertThat(oneMinute.compareTo(new ElapsedTime(ONE_MINUTE))).isEqualTo(0);
+        assertThat(oneMinute.compareTo(new ElapsedTime(ONE_SECOND))).isEqualTo(1);
+        assertThat(oneMinute.compareTo(new ElapsedTime(ONE_HOUR))).isEqualTo(-1);
+    }
+
 }

@@ -1,6 +1,6 @@
 package uk.co.mruoc.time;
 
-public class ElapsedTime {
+public class ElapsedTime implements Comparable<ElapsedTime> {
 
     public static final int MILLIS_IN_HOUR = 3600000;
     public static final int MILLIS_IN_MINUTE = 60000;
@@ -89,6 +89,11 @@ public class ElapsedTime {
     public ElapsedTime difference(long otherMillis) {
         long differenceMillis = Math.abs(totalMillis - otherMillis);
         return new ElapsedTime(differenceMillis);
+    }
+
+    @Override
+    public int compareTo(ElapsedTime otherTime) {
+        return new Long(totalMillis).compareTo(otherTime.getTotalMillis());
     }
 
     private long toHours(long totalMillis) {
