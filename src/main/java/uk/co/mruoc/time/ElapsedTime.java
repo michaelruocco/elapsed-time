@@ -73,6 +73,15 @@ public class ElapsedTime {
         return new ElapsedTime(combinedTotalMillis);
     }
 
+    public ElapsedTime subtract(ElapsedTime otherTime) {
+        return subtract(otherTime.getTotalMillis());
+    }
+
+    public ElapsedTime subtract(long millisToSubtract) {
+        long subtractedMillis = totalMillis - millisToSubtract;
+        return new ElapsedTime(subtractedMillis);
+    }
+
     private long toHours(long totalMillis) {
         return (totalMillis / MILLIS_IN_HOUR);
     }
@@ -96,5 +105,6 @@ public class ElapsedTime {
     private long secondsInMillis() {
         return seconds * MILLIS_IN_SECONDS;
     }
+
 
 }

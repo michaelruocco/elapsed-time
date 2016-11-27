@@ -95,7 +95,7 @@ public class ElapsedTimeTest {
     }
 
     @Test
-    public void shouldAddTimesTogether() {
+    public void shouldAddTimeOneTimeToAnother() {
         ElapsedTime oneMinute = new ElapsedTime(ONE_MINUTE);
         ElapsedTime result = oneMinute.add(oneMinute);
         assertThat(result.getTotalMillis()).isEqualTo(TWO_MINUTES);
@@ -106,6 +106,20 @@ public class ElapsedTimeTest {
         ElapsedTime oneMinute = new ElapsedTime(ONE_MINUTE);
         ElapsedTime result = oneMinute.add(ONE_MINUTE);
         assertThat(result.getTotalMillis()).isEqualTo(TWO_MINUTES);
+    }
+
+    @Test
+    public void shouldSubtractOneTimeFromAnotherTogether() {
+        ElapsedTime oneMinute = new ElapsedTime(ONE_MINUTE);
+        ElapsedTime result = oneMinute.subtract(oneMinute);
+        assertThat(result.getTotalMillis()).isEqualTo(ZERO);
+    }
+
+    @Test
+    public void shouldSubtractMillisFromTime() {
+        ElapsedTime oneMinute = new ElapsedTime(ONE_MINUTE);
+        ElapsedTime result = oneMinute.subtract(ONE_MINUTE);
+        assertThat(result.getTotalMillis()).isEqualTo(ZERO);
     }
 
 }
