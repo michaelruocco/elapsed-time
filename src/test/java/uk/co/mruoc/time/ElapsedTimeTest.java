@@ -1,5 +1,6 @@
 package uk.co.mruoc.time;
 
+
 import org.junit.Test;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -11,6 +12,7 @@ public class ElapsedTimeTest {
     private static final int ONE_SECOND = 1000;
     private static final int ONE_MINUTE = 60000;
     private static final int ONE_HOUR = 3600000;
+    private static final int TWO_MINUTES = ONE_MINUTE * 2;
 
     @Test
     public void shouldReturnZeroMillisByDefault() {
@@ -90,6 +92,20 @@ public class ElapsedTimeTest {
         ElapsedTime time = new ElapsedTime(ONE_MINUTE);
         ElapsedTime otherTime = new ElapsedTime(ONE_MINUTE);
         assertThat(time.isBefore(otherTime)).isFalse();
+    }
+
+    @Test
+    public void shouldAddTimesTogether() {
+        ElapsedTime oneMinute = new ElapsedTime(ONE_MINUTE);
+        ElapsedTime result = oneMinute.add(oneMinute);
+        assertThat(result.getTotalMillis()).isEqualTo(TWO_MINUTES);
+    }
+
+    @Test
+    public void shouldAddMillisToTime() {
+        ElapsedTime oneMinute = new ElapsedTime(ONE_MINUTE);
+        ElapsedTime result = oneMinute.add(ONE_MINUTE);
+        assertThat(result.getTotalMillis()).isEqualTo(TWO_MINUTES);
     }
 
 }

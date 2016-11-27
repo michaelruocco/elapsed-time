@@ -64,6 +64,15 @@ public class ElapsedTime {
         return this.totalMillis < otherTime.totalMillis;
     }
 
+    public ElapsedTime add(ElapsedTime otherTime) {
+        return add(otherTime.getTotalMillis());
+    }
+
+    public ElapsedTime add(long millisToAdd) {
+        long combinedTotalMillis = totalMillis + millisToAdd;
+        return new ElapsedTime(combinedTotalMillis);
+    }
+
     private long toHours(long totalMillis) {
         return (totalMillis / MILLIS_IN_HOUR);
     }
