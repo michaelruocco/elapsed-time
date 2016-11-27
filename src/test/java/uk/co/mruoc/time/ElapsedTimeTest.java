@@ -122,4 +122,19 @@ public class ElapsedTimeTest {
         assertThat(result.getTotalMillis()).isEqualTo(ZERO);
     }
 
+    @Test
+    public void shouldCalculateDifferentBetweenOneTimeAndAnother() {
+        ElapsedTime oneMinute = new ElapsedTime(ONE_MINUTE);
+        ElapsedTime twoMinutes = new ElapsedTime(TWO_MINUTES);
+        ElapsedTime result = oneMinute.difference(twoMinutes);
+        assertThat(result.getTotalMillis()).isEqualTo(ONE_MINUTE);
+    }
+
+    @Test
+    public void shouldCalculateDifferentBetweenTimeAndMillis() {
+        ElapsedTime oneMinute = new ElapsedTime(ONE_MINUTE);
+        ElapsedTime result = oneMinute.difference(TWO_MINUTES);
+        assertThat(result.getTotalMillis()).isEqualTo(ONE_MINUTE);
+    }
+
 }
