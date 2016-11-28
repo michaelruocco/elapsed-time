@@ -1,6 +1,7 @@
 package uk.co.mruoc.time;
 
 import static java.lang.Integer.parseInt;
+import static org.apache.commons.lang3.StringUtils.*;
 import static uk.co.mruoc.time.ElapsedTime.MILLIS_IN_HOUR;
 import static uk.co.mruoc.time.ElapsedTime.MILLIS_IN_MINUTE;
 import static uk.co.mruoc.time.ElapsedTime.MILLIS_IN_SECONDS;
@@ -39,7 +40,13 @@ public class ElapsedTimeParser {
 
     private int toMillis(String s) {
         String secondsAndMillis = toSecondsAndMillis(s);
-        return parseInt(splitOnDot(secondsAndMillis)[1]);
+        String millisString = splitOnDot(secondsAndMillis)[1];
+        millisString = padMillis(millisString);
+        return parseInt(millisString);
+    }
+
+    private String padMillis(String millisString) {
+        return rightPad(millisString, 3, '0');
     }
 
     private String[] splitOnColon(String s) {

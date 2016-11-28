@@ -24,6 +24,18 @@ public class ElapsedTimeParserTest {
     }
 
     @Test
+    public void shouldParseValidTimeWithTwoMillisecondDigitsSpecified() {
+        String validTime = "01:02:03.10";
+
+        ElapsedTime time = parser.parse(validTime);
+
+        assertThat(time.getHours()).isEqualTo(1);
+        assertThat(time.getMinutes()).isEqualTo(2);
+        assertThat(time.getSeconds()).isEqualTo(3);
+        assertThat(time.getMillis()).isEqualTo(100);
+    }
+
+    @Test
     public void shouldThrowExceptionForInvalidTime() {
         String invalidTime = "invalid";
 
