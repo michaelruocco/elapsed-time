@@ -1,7 +1,5 @@
 package uk.co.mruoc.time;
 
-import java.util.Objects;
-
 public class ElapsedTime implements Comparable<ElapsedTime> {
 
     public static final int MILLIS_IN_HOUR = 3600000;
