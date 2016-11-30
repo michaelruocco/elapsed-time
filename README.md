@@ -17,7 +17,7 @@ gradle you would do this by adding the following to your build.gradle file:
 
 ```
 dependencies {
-    classpath 'com.github.michaelruocco:elapsed-time:1.0.3'
+    classpath 'com.github.michaelruocco:elapsed-time:1.0.4'
 }
 ```
 
@@ -28,18 +28,17 @@ value like so:
 ElapsedTime time = new ElapsedTime(1000); // creates an instance with a value of 1 second
 ```
 
-To build a value from a string to you can use the ElapsedTimeConverter:
+Or to build a value from a string to you can use the following:
 
 ```
-ElapsedTimeConverter converter = new ElapsedTimeConverter();
-ElapsedTime time = converter.toElapsedTime("00:00:01.000"); // creates an instance with a value of 1 second
+ElapsedTime time = new ElapsedTime("00:00:01.000"); // creates an instance with a value of 1 second
 ```
 
-The converter can also be used to convert an elapsed time instance to a formatted string:
+To toString method can be used to convert an elapsed time instance to a formatted string:
 
 ```
 ElapsedTime time = new ElapsedTime(1000);
-String formattedTime = converter.toString(time); // will give a string value of "00:00:01.000"
+String formattedTime = time.toString(); // will give a string value of "00:00:01.000"
 ```
 
 Additionally some component classes are available for formatting, parsing and validation if
