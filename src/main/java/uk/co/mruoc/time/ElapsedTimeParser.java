@@ -9,13 +9,16 @@ import static uk.co.mruoc.time.ElapsedTime.MILLIS_IN_SECONDS;
 public class ElapsedTimeParser {
 
     public ElapsedTime parse(String input) {
+        return new ElapsedTime(toMilliseconds(input));
+    }
+
+    public long toMilliseconds(String input) {
         try {
             long hours = toHours(input);
             long minutes = toMinutes(input);
             long seconds = toSeconds(input);
             long millis = toMillis(input);
-            long totalMillis = calculateTotalMillis(hours, minutes, seconds, millis);
-            return new ElapsedTime(totalMillis);
+            return calculateTotalMillis(hours, minutes, seconds, millis);
         } catch (NumberFormatException e) {
             throw new ElapsedTimeFormatException(input, e);
         }

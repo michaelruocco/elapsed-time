@@ -1,10 +1,14 @@
 package uk.co.mruoc.time;
 
+import java.util.Objects;
+
 public class ElapsedTime implements Comparable<ElapsedTime> {
 
     public static final int MILLIS_IN_HOUR = 3600000;
     public static final int MILLIS_IN_MINUTE = 60000;
     public static final int MILLIS_IN_SECONDS = 1000;
+
+    private static final ElapsedTimeConverter CONVERTER = new ElapsedTimeConverter();
 
     private final long totalMillis;
     private final long hours;
@@ -17,8 +21,8 @@ public class ElapsedTime implements Comparable<ElapsedTime> {
     }
 
     public ElapsedTime(long totalMillis) {
-        this.totalMillis = totalMillis;
-        long tempTotalMillis = totalMillis;
+        this.totalMillis = Math.abs(totalMillis);
+        long tempTotalMillis = Math.abs(totalMillis);
 
         this.hours = toHours(tempTotalMillis);
         tempTotalMillis -= hoursInMillis();
@@ -30,6 +34,10 @@ public class ElapsedTime implements Comparable<ElapsedTime> {
         tempTotalMillis -= secondsInMillis();
 
         this.millis = tempTotalMillis;
+    }
+
+    public ElapsedTime(String timeString) {
+        this(CONVERTER.toMilliseconds(timeString));
     }
 
     public long getTotalMillis() {
@@ -94,6 +102,29 @@ public class ElapsedTime implements Comparable<ElapsedTime> {
     @Override
     public int compareTo(ElapsedTime otherTime) {
         return new Long(totalMillis).compareTo(otherTime.getTotalMillis());
+    }
+
+    @Override
+    public String toString() {
+        return CONVERTER.toString(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null)
+            return false;
+
+        if (o instanceof ElapsedTime) {
+            ElapsedTime otherTime = (ElapsedTime) o;
+            return totalMillis == otherTime.getTotalMillis();
+        }
+
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return new Long(totalMillis).hashCode();
     }
 
     private long toHours(long totalMillis) {

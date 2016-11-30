@@ -11,6 +11,11 @@ public class ElapsedTimeConverter {
         return parser.parse(input);
     }
 
+    public long toMilliseconds(String input) {
+        validator.validate(input);
+        return parser.toMilliseconds(input);
+    }
+
     public String toString(ElapsedTime time) {
         return formatter.format(time);
     }

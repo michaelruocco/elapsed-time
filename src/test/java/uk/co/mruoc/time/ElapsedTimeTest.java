@@ -3,6 +3,10 @@ package uk.co.mruoc.time;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class ElapsedTimeTest {
@@ -13,6 +17,7 @@ public class ElapsedTimeTest {
     private static final int ONE_MINUTE = 60000;
     private static final int ONE_HOUR = 3600000;
     private static final int TWO_MINUTES = ONE_MINUTE * 2;
+    private static final String TWO_MINUTES_STRING = "00:02:00.000";
 
     @Test
     public void shouldReturnZeroMillisByDefault() {
@@ -53,14 +58,14 @@ public class ElapsedTimeTest {
     }
 
     @Test
-    public void shouldReturnTrueIfTimesAreEqual() {
+    public void isEqualToShouldReturnTrueIfTimesAreEqual() {
         ElapsedTime time = new ElapsedTime(ONE_MINUTE);
         ElapsedTime otherTime = new ElapsedTime(ONE_MINUTE);
         assertThat(time.isEqualTo(otherTime)).isTrue();
     }
 
     @Test
-    public void shouldReturnFalseIfTimesAreNotEqual() {
+    public void isEqualTohouldReturnFalseIfTimesAreNotEqual() {
         ElapsedTime time = new ElapsedTime(ONE_MINUTE);
         ElapsedTime otherTime = new ElapsedTime(ONE_HOUR);
         assertThat(time.isEqualTo(otherTime)).isFalse();
@@ -144,6 +149,89 @@ public class ElapsedTimeTest {
         assertThat(oneMinute.compareTo(new ElapsedTime(ONE_MINUTE))).isEqualTo(0);
         assertThat(oneMinute.compareTo(new ElapsedTime(ONE_SECOND))).isEqualTo(1);
         assertThat(oneMinute.compareTo(new ElapsedTime(ONE_HOUR))).isEqualTo(-1);
+    }
+
+    @Test
+    public void toStringShouldReturnFormattedTime() {
+        ElapsedTime time = new ElapsedTime(TWO_MINUTES);
+
+        assertThat(time.toString()).isEqualTo(TWO_MINUTES_STRING);
+    }
+
+    @Test
+    public void shouldBeConstructedFromString() {
+        ElapsedTime time = new ElapsedTime(TWO_MINUTES_STRING);
+
+        assertThat(time.getTotalMillis()).isEqualTo(TWO_MINUTES);
+    }
+
+    @Test
+    public void equalsShouldReturnFalseIsComparedToNull() {
+        ElapsedTime time = new ElapsedTime(ONE_MINUTE);
+        assertThat(time.equals(null)).isFalse();
+    }
+
+    @Test
+    public void equalsShouldReturnFalseIfNotComparedToElapsedTime() {
+        ElapsedTime time = new ElapsedTime(ONE_MINUTE);
+        assertThat(time.equals(new Object())).isFalse();
+    }
+
+    @Test
+    public void hashCodeValueShouldBeTheSameIfTotalMillisecondsIsTheSame() {
+        ElapsedTime time1 = new ElapsedTime(ONE_MINUTE);
+        ElapsedTime time2 = new ElapsedTime(ONE_MINUTE);
+        assertThat(time1.hashCode()).isEqualTo(time2.hashCode());
+    }
+
+    @Test
+    public void hashCodeValueShouldBeDifferentIfTotalMillisecondsIsDifferent() {
+        ElapsedTime time1 = new ElapsedTime(ONE_MINUTE);
+        ElapsedTime time2 = new ElapsedTime(TWO_MINUTES);
+        assertThat(time1.hashCode()).isNotEqualTo(time2.hashCode());
+    }
+
+    @Test
+    public void equalsShouldReturnTrueIfTimesAreEqual() {
+        ElapsedTime time = new ElapsedTime(ONE_MINUTE);
+        ElapsedTime otherTime = new ElapsedTime(ONE_MINUTE);
+        assertThat(time.equals(otherTime)).isTrue();
+    }
+
+    @Test
+    public void equalsShouldReturnFalseIfTimesAreNotEqual() {
+        ElapsedTime time = new ElapsedTime(ONE_MINUTE);
+        ElapsedTime otherTime = new ElapsedTime(ONE_HOUR);
+        assertThat(time.equals(otherTime)).isFalse();
+    }
+
+    @Test
+    public void shouldSortCorrectlyInCollection() {
+        ElapsedTime third = new ElapsedTime(ONE_HOUR);
+        ElapsedTime first = new ElapsedTime(ONE_MILLI);
+        ElapsedTime second = new ElapsedTime(ONE_MILLI);
+
+
+        List<ElapsedTime> times = Arrays.asList(third, first, second);
+
+        Collections.sort(times);
+
+        assertThat(times.get(0)).isEqualTo(first);
+        assertThat(times.get(1)).isEqualTo(second);
+        assertThat(times.get(2)).isEqualTo(third);
+    }
+
+    @Test
+    public void shouldObserveContainsCorrectlyInCollection() {
+        ElapsedTime oneMilli1 = new ElapsedTime(ONE_MILLI);
+        ElapsedTime oneMilli2 = new ElapsedTime(ONE_MILLI);
+        ElapsedTime oneMinute = new ElapsedTime(ONE_MINUTE);
+
+        List<ElapsedTime> times = Collections.singletonList(oneMilli1);
+
+        assertThat(times.contains(oneMilli1)).isTrue();
+        assertThat(times.contains(oneMilli2)).isTrue();
+        assertThat(times.contains(oneMinute)).isFalse();
     }
 
 }
