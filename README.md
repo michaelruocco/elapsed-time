@@ -8,7 +8,6 @@
 This project gives the ability to be able to easily create and work with an elapsed time
 object. It can be created by passing a long value of milliseconds or a formatted string.
 The object has no notion of time zone or date, it is focused only on elapsed time values.
-This project is my attempt at the connect four kata exercise that is outlined here:
 
 ## Usage
 
