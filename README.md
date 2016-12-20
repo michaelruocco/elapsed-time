@@ -16,7 +16,7 @@ gradle you would do this by adding the following to your build.gradle file:
 
 ```
 dependencies {
-    classpath 'com.github.michaelruocco:elapsed-time:1.0.4'
+    compile 'com.github.michaelruocco:elapsed-time:1.0.4'
 }
 ```
 
