@@ -2,8 +2,8 @@
 
 [![Build Status](https://travis-ci.org/michaelruocco/elapsed-time.svg?branch=master)](https://travis-ci.org/michaelruocco/elapsed-time)
 [![Coverage Status](https://coveralls.io/repos/github/michaelruocco/elapsed-time/badge.svg?branch=master)](https://coveralls.io/github/michaelruocco/elapsed-time?branch=master)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.michaelruocco/elapsed-time/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.michaelruocco/elapsed-time)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/14bb0479ff524fd4a4ef2474077d8fd5)](https://www.codacy.com/app/michael-ruocco/elapsed-time?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=michaelruocco/elapsed-time&amp;utm_campaign=Badge_Grade)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.michaelruocco/elapsed-time/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.michaelruocco/elapsed-time)
 
 This project gives the ability to be able to easily create and work with an elapsed time
 object. It can be created by passing a long value of milliseconds or a formatted string.
