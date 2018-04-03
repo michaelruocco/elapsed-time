@@ -2,10 +2,8 @@ package uk.co.mruoc.time;
 
 import org.junit.Test;
 
-import static com.googlecode.catchexception.apis.BDDCatchException.caughtException;
-import static com.googlecode.catchexception.apis.BDDCatchException.when;
 import static org.assertj.core.api.Java6Assertions.assertThat;
-import static org.assertj.core.api.Java6BDDAssertions.then;
+import static org.assertj.core.api.ThrowableAssert.catchThrowable;
 
 public class ElapsedTimeValidatorTest {
 
@@ -24,12 +22,11 @@ public class ElapsedTimeValidatorTest {
     public void shouldThrowExceptionIfTimeStringIsInvalid() {
         String invalidTime = "invalid";
 
-        when(validator).validate(invalidTime);
+        Throwable thrown = catchThrowable(() -> validator.validate(invalidTime));
 
-        then(caughtException())
-                .isInstanceOf(ElapsedTimeFormatException.class)
-                .hasMessage(invalidTime)
-                .hasCauseInstanceOf(IllegalArgumentException.class);
+        assertThat(thrown).isInstanceOf(ElapsedTimeFormatException.class)
+                .hasCauseInstanceOf(IllegalArgumentException.class)
+                .hasMessage(invalidTime);
     }
 
 }

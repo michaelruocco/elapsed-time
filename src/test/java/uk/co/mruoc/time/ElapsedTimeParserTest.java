@@ -2,10 +2,8 @@ package uk.co.mruoc.time;
 
 import org.junit.Test;
 
-import static com.googlecode.catchexception.apis.BDDCatchException.caughtException;
-import static com.googlecode.catchexception.apis.BDDCatchException.when;
 import static org.assertj.core.api.Java6Assertions.assertThat;
-import static org.assertj.core.api.Java6BDDAssertions.then;
+import static org.assertj.core.api.ThrowableAssert.catchThrowable;
 
 public class ElapsedTimeParserTest {
 
@@ -39,12 +37,11 @@ public class ElapsedTimeParserTest {
     public void shouldThrowExceptionForInvalidTime() {
         String invalidTime = "invalid";
 
-        when(parser).parse(invalidTime);
+        Throwable thrown = catchThrowable(() -> parser.parse(invalidTime));
 
-        then(caughtException())
-                .isInstanceOf(ElapsedTimeFormatException.class)
-                .hasMessage(invalidTime)
-                .hasCauseInstanceOf(NumberFormatException.class);
+        assertThat(thrown).isInstanceOf(ElapsedTimeFormatException.class)
+                .hasCauseInstanceOf(NumberFormatException.class)
+                .hasMessage(invalidTime);
     }
 
 }
